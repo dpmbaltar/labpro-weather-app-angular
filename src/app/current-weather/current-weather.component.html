@@ -1,22 +1,18 @@
-<!-- Current weather -->
-<section *ngIf="(current | async) as weather">
-  <div class="card" *ngIf="weather.current_weather as current_weather">
+<section>
+  <div class="card" *ngIf="(currentWeather | async) as weather">
 
     <div class="card-header">
       <div class="d-flex">
         <div class="flex-shrink-0">
-          <div *ngIf="weather.location as location">
+          <div>
             <span class="text-muted"><i class="bi bi-geo-alt-fill"></i>&nbsp;</span>
-            <span class="text-muted">{{ location.name }}, {{ location.region }}, {{ location.country }}</span>
-          </div>
-          <div *ngIf="!weather.location">
-            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span class="text-muted">{{ weather.location.name }}, {{ weather.location.region }}, {{ weather.location.country }}</span>
           </div>
         </div>
         <div class="flex-grow-1 ms-3"></div>
         <div class="flex-shrink-0">
-          <div *ngIf="weather.current_weather as current_weather">
-            <span class="text-muted"><i class="bi bi-calendar"></i> {{ current_weather.time | date:'fullDate' }} <i class="bi bi-clock"></i> {{ current_weather.time | date:'mediumTime' }}</span>
+          <div *ngIf="weather.current">
+            <span class="text-muted"><i class="bi bi-calendar"></i> {{ weather.current.time | date:'fullDate' }} <i class="bi bi-clock"></i> {{ weather.current.time | date:'mediumTime' }}</span>
           </div>
         </div>
       </div>
@@ -25,21 +21,21 @@
     <div class="card-body">
       <div class="d-flex">
         <div class="flex-shrink-0">
-          <img src="assets/images/64x64/{{ current_weather.is_day ? 'day' : 'night' }}/{{ current_weather.weathercode | weatherCondition:'icon' | async }}.png">
+          <img src="assets/images/64x64/{{ weather.current.isDay > 0 ? 'day' : 'night' }}/{{ weather.current.weatherCode | weatherCondition:'icon' | async }}.png">
         </div>
         <div class="flex-grow-1 ms-3">
-          <h1 class="card-title">{{ current_weather.temperature | number:'1.0-1' }} &deg;C</h1>
+          <h1 class="card-title">{{ weather.current.temperature | number:'1.0-1' }} &deg;C</h1>
           <h2 data-class="card-subtitle mb-2">
-            <span class="text-muted">{{ current_weather.weathercode | weatherCondition:(current_weather.is_day ? 'day' : 'night') | async }}</span>
+            <span class="text-muted">{{ weather.current.weatherCode | weatherCondition:(weather.current.isDay ? 'day' : 'night') | async }}</span>
           </h2>
         </div>
         <div class="flex-shrink-0">
-          <h3>{{ current_weather.feelslike | number }} &deg;C <i class="bi bi-thermometer-sun"></i></h3>
+          <h3>{{ weather.current.apparentTemperature | number }} &deg;C <i class="bi bi-thermometer-sun"></i></h3>
           <h6 class="text-muted">Sensación térmica</h6>
         </div>
       </div>
-      <p class="card-text {{ current_weather.uv > 7 ? 'alert alert-danger' : (current_weather.uv > 5 ? 'alert alert-warning' : '') }}" *ngIf="current_weather.uv > 2">
-        {{ current_weather.uv | uvIndicator }}
+      <p class="card-text {{ weather.current.uv > 7 ? 'alert alert-danger' : (weather.current.uv > 5 ? 'alert alert-warning' : '') }}" *ngIf="weather.current.uv > 2">
+        {{ weather.current.uv | uvIndicator }}
       </p>
     </div>
 
@@ -49,17 +45,17 @@
           <div class="col text-center">
             <h2><i class="bi bi-sun"></i></h2>
             <h6 class="text-muted">Índice UV</h6>
-            <h4>{{ current_weather.uv | number }}</h4>
+            <h4>{{ weather.current.uv | number }}</h4>
           </div>
           <div class="col text-center">
             <h2><i class="bi bi-wind"></i></h2>
             <h6 class="text-muted">Viento</h6>
-            <h4>{{ current_weather.windspeed | number:'1.0-1' }} km/h</h4>
+            <h4>{{ weather.current.windSpeed | number:'1.0-1' }} km/h</h4>
           </div>
           <div class="col text-center">
             <h2><i class="bi bi-moisture"></i></h2>
             <h6 class="text-muted">Humedad</h6>
-            <h4>{{ current_weather.humidity | number:'1.0-1' }} %</h4>
+            <h4>{{ weather.current.humidity | number:'1.0-1' }} %</h4>
           </div>
         </div>
       </li>

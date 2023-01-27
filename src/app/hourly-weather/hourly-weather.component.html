@@ -1,0 +1,111 @@
+<div *ngIf="(hourlyWeather | async) as weather">
+  <div *ngIf="weather.hourly[0] as day">
+
+    <ul class="nav nav-tabs" id="{{id}}-tabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active"
+          id="{{id}}-temp-tab"
+          type="button"
+          role="tab"
+          data-bs-toggle="tab"
+          [attr.data-bs-target]="'#'+id+'-temp-tab-pane'"
+          [attr.aria-controls]="id+'-temp-tab-pane'"
+          aria-selected="true"><i class="bi bi-sun"></i> Temperatura</button>
+      </li>
+      <li>
+        <button class="nav-link"
+          id="{{id}}-apparent-tab"
+          type="button"
+          role="tab"
+          data-bs-toggle="tab"
+          [attr.data-bs-target]="'#'+id+'-apparent-tab-pane'"
+          [attr.aria-controls]="id+'-apparent-tab-pane'"
+          aria-selected="false"><i class="bi bi-thermometer-sun"></i> Sensación térmica</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link"
+          id="{{id}}-precip-tab"
+          type="button"
+          role="tab"
+          data-bs-toggle="tab"
+          [attr.data-bs-target]="'#'+id+'-precip-tab-pane'"
+          [attr.aria-controls]="id+'-precip-tab-pane'"
+          aria-selected="false"><i class="bi bi-droplet-half"></i> Precipitaciones</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link"
+          id="{{id}}-humidity-tab"
+          type="button"
+          role="tab"
+          data-bs-toggle="tab"
+          [attr.data-bs-target]="'#'+id+'-humidity-tab-pane'"
+          [attr.aria-controls]="id+'-humidity-tab-pane'"
+          aria-selected="false"><i class="bi bi-moisture"></i> Humedad relativa</button>
+      </li>
+    </ul>
+
+    <div class="tab-content" id="{{id}}-tabs-content">
+      <div class="tab-pane fade show active"
+        id="{{id}}-temp-tab-pane"
+        [attr.aria-labelledby]="id+'-temp-tab'"
+        role="tabpanel"
+        tabindex="0">
+
+        <app-chart id="{{ id }}-temp-chart"
+          type="line"
+          [labels]="hourlyLabels"
+          [data]="[day.temperature]"
+          [dataOptions]="[chart.temperature.dataOptions]"
+          [options]="chart.temperature.options">
+        </app-chart>
+
+      </div>
+      <div class="tab-pane fade"
+        id="{{id}}-apparent-tab-pane"
+        [attr.aria-labelledby]="id+'-apparent-tab'"
+        role="tabpanel"
+        tabindex="0">
+
+        <app-chart id="{{ id }}-apparent-chart"
+          type="line"
+          [labels]="hourlyLabels"
+          [data]="[day.apparentTemperature]"
+          [dataOptions]="[chart.apparentTemperature.dataOptions]"
+          [options]="chart.apparentTemperature.options">
+        </app-chart>
+
+      </div>
+      <div class="tab-pane fade"
+        id="{{id}}-precip-tab-pane"
+        [attr.aria-labelledby]="id+'-precip-tab'"
+        role="tabpanel"
+        tabindex="0">
+
+        <app-chart id="{{ id }}-precip-chart"
+          type="bar"
+          [labels]="hourlyLabels"
+          [data]="[day.precipitation]"
+          [dataOptions]="[chart.precipitation.dataOptions]"
+          [options]="chart.precipitation.options">
+        </app-chart>
+
+      </div>
+      <div class="tab-pane fade"
+        id="{{id}}-humidity-tab-pane"
+        [attr.aria-labelledby]="id+'-humidity-tab'"
+        role="tabpanel"
+        tabindex="0">
+
+        <app-chart id="{{ id }}-humidity-chart"
+          type="bar"
+          [labels]="hourlyLabels"
+          [data]="[day.relativeHumidity]"
+          [dataOptions]="[chart.relativeHumidity.dataOptions]"
+          [options]="chart.relativeHumidity.options">
+        </app-chart>
+
+      </div>
+    </div>
+
+  </div>
+</div>

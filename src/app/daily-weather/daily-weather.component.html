@@ -1,0 +1,75 @@
+<section>
+  <div class="card" *ngIf="(dailyWeather | async) as weather">
+
+    <div class="card-header">
+      <div class="d-flex">
+        <div class="flex-shrink-0">
+          <div>
+            <span class="text-muted"><i class="bi bi-geo-alt-fill"></i>&nbsp;</span>
+            <span class="text-muted">{{ weather.location.name }}, {{ weather.location.region }}, {{ weather.location.country }}</span>
+          </div>
+        </div>
+        <div class="flex-grow-1 ms-3"></div>
+        <div class="flex-shrink-0">
+          <div *ngIf="time">
+            <span class="text-muted"><i class="bi bi-calendar"></i> {{ time | date:'fullDate' }} <i class="bi bi-clock"></i> {{ time | date:'mediumTime' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngFor="let day of weather.daily; index as i;">
+        <div class="d-flex">
+          <div class="flex-shrink-0">
+            <img src="assets/images/64x64/day/{{ day.weatherCode | weatherCondition:'icon' | async }}.png">
+          </div>
+          <div class="flex-grow-1 ms-3">
+            <h4>
+              <span>{{ day.temperatureMax | number:'1.0-1' }} &deg;C</span>
+              <span class="text-muted small">| {{ day.temperatureMin | number:'1.0-1' }} &deg;C</span>
+            </h4>
+            <h5>
+              <span class="text-muted">{{ day.weatherCode | weatherCondition:'day' | async }}</span>
+            </h5>
+          </div>
+          <div class="flex-shrink-0">
+            <a class="btn btn-link" data-bs-toggle="collapse" href="#day-{{i}}" role="button" aria-expanded="false" [attr.aria-controls]="'day-'+i">
+              {{ day.time | date:'EEEE d' }} <i class="bi bi-chevron-expand"></i>
+            </a>
+          </div>
+        </div>
+        <div class="collapse" id="day-{{i}}">
+
+          <div class="card mb-2">
+            <div class="card-body">
+              <app-hourly-weather
+                id="hourly-weather-day-{{i}}"
+                [date]="day.time"
+                [location]="weather.location">
+              </app-hourly-weather>
+           </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex">
+                <div class="flex-grow-1 ms-3 text-center">
+                  <h2><i class="bi bi-sunrise-fill"></i></h2>
+                  <h6 class="text-muted">Amanecer</h6>
+                  <h4>{{ day.sunrise | date:'shortTime' }}</h4>
+                </div>
+                <div class="vr"></div>
+                <div class="flex-grow-1 ms-3 text-center">
+                  <h2><i class="bi bi-sunset-fill"></i></h2>
+                  <h6 class="text-muted">Atardecer</h6>
+                  <h4>{{ day.sunset | date:'shortTime' }}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>

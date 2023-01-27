@@ -3,11 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { CurrentComponent } from './current/current.component';
-import { ForecastComponent } from './forecast/forecast.component';
 import { ConfigService } from './config.service';
 import { WeatherConditionPipe } from './weather-condition.pipe';
 import { UvIndicatorPipe } from './uv-indicator.pipe';
+import { ChartComponent } from './chart/chart.component';
+import { CurrentWeatherComponent } from './current-weather/current-weather.component';
+import { DailyWeatherComponent } from './daily-weather/daily-weather.component';
+import { HourlyWeatherComponent } from './hourly-weather/hourly-weather.component';
 
 export function setupConfigServiceFactory(
   service: ConfigService
@@ -18,10 +20,12 @@ export function setupConfigServiceFactory(
 @NgModule({
   declarations: [
     AppComponent,
-    CurrentComponent,
-    ForecastComponent,
     WeatherConditionPipe,
-    UvIndicatorPipe
+    UvIndicatorPipe,
+    ChartComponent,
+    CurrentWeatherComponent,
+    DailyWeatherComponent,
+    HourlyWeatherComponent
   ],
   imports: [
     BrowserModule,

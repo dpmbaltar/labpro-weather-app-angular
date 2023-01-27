@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { WeatherCondition, WeatherResult } from '../weather';
+import { CurrentWeatherResponse } from '../weather';
 import { WeatherService } from '../weather.service';
 
 @Component({
   selector: 'app-current',
-  templateUrl: './current.component.html',
-  styleUrls: ['./current.component.css']
+  templateUrl: './current-weather.component.html',
+  styleUrls: ['./current-weather.component.css']
 })
-export class CurrentComponent implements OnInit {
+export class CurrentWeatherComponent implements OnInit {
 
   loaded: boolean = false;
-  current!: Observable<WeatherResult>;
+  currentWeather!: Observable<CurrentWeatherResponse>;
 
   constructor(private weatherService: WeatherService) {}
 
@@ -19,8 +19,9 @@ export class CurrentComponent implements OnInit {
     this.weatherService.getPosition()
       .then(position => {
         const { latitude, longitude } = position.coords;
-        this.current = this.weatherService.getCurrent(latitude, longitude);
-        this.current.subscribe(res => this.loaded = true);
+        this.currentWeather = this.weatherService.getCurrent(latitude, longitude);
+        this.currentWeather.subscribe(res => this.loaded = true);
       });
   }
+
 }

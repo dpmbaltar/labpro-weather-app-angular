@@ -21,7 +21,7 @@
     <div class="card-body">
       <div class="d-flex">
         <div class="flex-shrink-0">
-          <img src="assets/images/64x64/{{ weather.current.isDay > 0 ? 'day' : 'night' }}/{{ weather.current.weatherCode | weatherCondition:'icon' | async }}.png">
+          <img src="assets/images/64x64/{{ weather.current.isDay ? 'day' : 'night' }}/{{ weather.current.weatherCode | weatherCondition:'icon' | async }}.png">
         </div>
         <div class="flex-grow-1 ms-3">
           <h1 class="card-title">{{ weather.current.temperature | number:'1.0-1' }} &deg;C</h1>

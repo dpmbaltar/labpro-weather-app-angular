@@ -19,7 +19,7 @@ export interface CurrentWeather {
   windSpeed: number;
   windDirection: number;
   uv: number;
-  isDay: number;
+  isDay: boolean;
   weatherCode: number;
 }
 

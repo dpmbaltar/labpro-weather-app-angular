@@ -22,15 +22,15 @@
       <li class="list-group-item" *ngFor="let day of weather.daily; index as i;">
         <div class="d-flex">
           <div class="flex-shrink-0">
-            <img src="assets/images/64x64/day/{{ day.weatherCode | weatherCondition:'icon' | async }}.png">
+            <img src="{{ day.conditionIcon | conditionIcon }}" alt="{{ day.conditionText }}">
           </div>
           <div class="flex-grow-1 ms-3">
             <h4>
-              <span>{{ day.temperatureMax | number:'1.0-1' }} &deg;C</span>
-              <span class="text-muted small">| {{ day.temperatureMin | number:'1.0-1' }} &deg;C</span>
+              <span title="Máxima"><i class="bi bi-thermometer-high"></i>{{ day.temperatureMax | number:'1.0-1' }} &deg;C</span>
+              <span title="Mínima" class="text-muted small"><i class="bi bi-thermometer-low"></i>{{ day.temperatureMin | number:'1.0-1' }} &deg;C</span>
             </h4>
             <h5>
-              <span class="text-muted">{{ day.weatherCode | weatherCondition:'day' | async }}</span>
+              <span class="text-muted">{{ day.conditionText }}</span>
             </h5>
           </div>
           <div class="flex-shrink-0">
@@ -67,6 +67,46 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Daily weather placeholder -->
+<section *ngIf="!loaded">
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col">
+          <p class="card-text placeholder-glow">
+            <span class="placeholder col-12"></span>
+          </p>
+        </div>
+        <div class="col"></div>
+        <div class="col">
+          <p class="card-text placeholder-glow">
+            <span class="placeholder col-12"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngFor="let _ of [].constructor(7)">
+        <div class="row">
+          <div class="col-10">
+            <h4 class="card-text placeholder-glow">
+              <span class="placeholder col-2"></span>
+            </h4>
+            <h5 class="card-text placeholder-glow">
+              <span class="placeholder col-4"></span>
+            </h5>
+          </div>
+          <div class="col-2">
+            <p class="card-text placeholder-glow">
+              <span class="placeholder col-12"></span>
+            </p>
           </div>
         </div>
       </li>

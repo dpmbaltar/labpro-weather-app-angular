@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { WeatherCondition, Weather, CurrentWeatherResponse, DailyWeatherResponse, HourlyWeatherResponse } from './weather';
+import { CurrentWeatherResponse, DailyWeatherResponse, HourlyWeatherResponse } from './weather';
 import { ConfigService } from './config.service';
 import { Observable, map, shareReplay } from 'rxjs';
 
@@ -9,7 +9,6 @@ import { Observable, map, shareReplay } from 'rxjs';
 })
 export class WeatherService implements OnInit {
 
-  private conditions!: Observable<WeatherCondition[]>;
   private current!: Observable<CurrentWeatherResponse>;
   private currentTime: number = 0;
   private daily!: Observable<DailyWeatherResponse>;
@@ -40,16 +39,6 @@ export class WeatherService implements OnInit {
         reject(error);
       });
     });
-  }
-
-  getConditions() {
-    if (!this.conditions) {
-      const url = this.config.apiBaseUrl + "/api/weather/conditions";
-      this.conditions = this.http.get<WeatherCondition[]>(url)
-        .pipe(shareReplay(1));
-    }
-
-    return this.conditions;
   }
 
   getCurrent(lat: number, lon: number) {

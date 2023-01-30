@@ -20,7 +20,8 @@ export interface CurrentWeather {
   windDirection: number;
   uv: number;
   isDay: boolean;
-  weatherCode: number;
+  conditionText: string;
+  conditionIcon: number;
 }
 
 export interface DailyWeather {
@@ -36,7 +37,8 @@ export interface DailyWeather {
   windSpeedMax: number;
   windGustsMax: number;
   windDirection: number;
-  weatherCode: number;
+  conditionText: string;
+  conditionIcon: number;
 }
 
 export interface HourlyWeather {
@@ -52,7 +54,8 @@ export interface HourlyWeather {
   windSpeed: number[];
   windDirection: number[];
   windGusts: number[];
-  weatherCode: number[];
+  conditionText: string[];
+  conditionIcon: number[];
 }
 
 export interface Weather {
@@ -66,24 +69,14 @@ export interface Weather {
 export interface CurrentWeatherResponse {
   location: WeatherLocation;
   current: CurrentWeather;
-  error?: any;
 }
 
 export interface DailyWeatherResponse {
   location: WeatherLocation;
   daily: DailyWeather[];
-  error?: any;
 }
 
 export interface HourlyWeatherResponse {
   location: WeatherLocation;
   hourly: HourlyWeather[];
-  error?: any;
-}
-
-export interface WeatherCondition {
-  code: number;
-  day: string;
-  night: string;
-  icon: number;
 }

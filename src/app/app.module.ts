@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { ConfigService } from './config.service';
-import { WeatherConditionPipe } from './weather-condition.pipe';
+import { ConditionIconPipe } from './condition-icon.pipe';
 import { UvIndicatorPipe } from './uv-indicator.pipe';
 import { ChartComponent } from './chart/chart.component';
 import { CurrentWeatherComponent } from './current-weather/current-weather.component';
@@ -20,7 +20,7 @@ export function setupConfigServiceFactory(
 @NgModule({
   declarations: [
     AppComponent,
-    WeatherConditionPipe,
+    ConditionIconPipe,
     UvIndicatorPipe,
     ChartComponent,
     CurrentWeatherComponent,

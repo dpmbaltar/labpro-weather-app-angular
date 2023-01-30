@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "labpro-weather-webapp": {
+    "labpro-weather-app-angular": {
       "i18n": {
         "sourceLocale": "es-AR"
       },
@@ -16,7 +16,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/labpro-weather-webapp",
+            "outputPath": "dist/labpro-weather-app-angular",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -67,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "labpro-weather-webapp:build:production"
+              "browserTarget": "labpro-weather-app-angular:build:production"
             },
             "development": {
-              "browserTarget": "labpro-weather-webapp:build:development"
+              "browserTarget": "labpro-weather-app-angular:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "labpro-weather-webapp:build"
+            "browserTarget": "labpro-weather-app-angular:build"
           }
         },
         "test": {

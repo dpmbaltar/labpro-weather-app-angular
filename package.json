@@ -1,5 +1,5 @@
 {
-  "name": "labpro-weather-webapp",
+  "name": "labpro-weather-app-angular",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

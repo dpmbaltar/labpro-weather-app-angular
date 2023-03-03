@@ -49,7 +49,6 @@ export interface HourlyWeather {
   relativeHumidity: number[];
   dewPoint: number[];
   cloudCover: number[];
-  visibility: number[];
   surfacePressure: number[];
   windSpeed: number[];
   windDirection: number[];
